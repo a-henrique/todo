@@ -1,20 +1,32 @@
 package com.todolist.todo.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 
 @Entity
 @Table(name = "todos")
 public class Todo {
 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Define que "id" é a coluna de identificacao da entidade
     private Long id;
     private String nome;
     private String descricao;
     private boolean realizado;
     private int prioridade;
+
+    public Todo(){
+
+    }
+
+    public Todo(Long id, String nome, String descricao, boolean realizado, int prioridade){
+        this.id = id;
+        this.nome = nome;
+        this.descricao = descricao;
+        this.realizado = realizado;
+        this.prioridade = prioridade;
+    }
 
     public Todo(String nome, String descricao, boolean realizado, int prioridade){
         this.nome = nome;

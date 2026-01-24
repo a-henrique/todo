@@ -2,6 +2,7 @@ package com.todolist.todo.service;
 
 import com.todolist.todo.entity.Todo;
 import com.todolist.todo.repository.TodoRepository;
+import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
