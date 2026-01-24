@@ -1,8 +1,12 @@
 package com.todolist.todo.entity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "todos")
 public class Todo {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Define que "id" é a coluna de identificacao da entidade
