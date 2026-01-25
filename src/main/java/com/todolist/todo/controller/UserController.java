@@ -23,6 +23,11 @@ public class UserController {
         return userServices.createUser(user);
     }
 
+    @GetMapping("/list/{id}")
+    public User listUserById(@PathVariable Long id){
+        return userServices.getById(id);
+    }
+
     @GetMapping("/list")
     public List<User> listUsers(){
         return userServices.listUsers();
@@ -36,5 +41,10 @@ public class UserController {
     @PatchMapping("/enable/{id}")
     public void enableUser(@PathVariable Long id){
         userServices.enableUser(id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void removeUser(@PathVariable Long id){
+        userServices.deleteUser(id);
     }
 }

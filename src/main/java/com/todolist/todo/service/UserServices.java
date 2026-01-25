@@ -43,4 +43,13 @@ public class UserServices {
         }
         userRepository.save(user);
     }
+
+    public void deleteUser(Long id){
+        User user = userRepository.getReferenceById(id);
+        if(userRepository.existsById(id)){
+            userRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Id não encontrado");
+        }
+    }
 }
