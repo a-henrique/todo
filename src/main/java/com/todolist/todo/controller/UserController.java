@@ -1,6 +1,7 @@
 package com.todolist.todo.controller;
 
 
+import com.todolist.todo.dto.ChangePasswordRequest;
 import com.todolist.todo.entity.User;
 import com.todolist.todo.service.UserServices;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class UserController {
         return userServices.createUser(user);
     }
 
-    @GetMapping("/list/{id}")
+    @GetMapping("/{id}/list")
     public User listUserById(@PathVariable Long id){
         return userServices.getById(id);
     }
@@ -33,18 +34,23 @@ public class UserController {
         return userServices.listUsers();
     }
 
-    @PatchMapping("/disable/{id}")
+    @PatchMapping("/{id}/disable")
     public void disableUser(@PathVariable Long id){
         userServices.disableUser(id);
     }
 
-    @PatchMapping("/enable/{id}")
+    @PatchMapping("/{id}/enable")
     public void enableUser(@PathVariable Long id){
         userServices.enableUser(id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}/delete")
     public void removeUser(@PathVariable Long id){
         userServices.deleteUser(id);
+    }
+
+    @PatchMapping("/{id}/change-password")
+    public void changePassword(@PathVariable Long id, @RequestBody ChangePasswordRequest body){
+        userServices.changePassword(id, body.currentPassword(), body.newPassword());
     }
 }

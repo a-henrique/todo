@@ -17,7 +17,7 @@ public class UserServices {
     }
 
     public User createUser(User user){
-        return userRepository.save(user);
+        return save(user);
     }
 
     public User getById(Long id){
@@ -33,7 +33,7 @@ public class UserServices {
         if(user.getStatus()){
             user.setStatus(false);
         }
-        userRepository.save(user);
+        save(user);
     }
 
     public void enableUser(Long id){
@@ -41,15 +41,28 @@ public class UserServices {
         if (!user.getStatus()){
             user.setStatus(true);
         }
-        userRepository.save(user);
+        save(user);
     }
 
     public void deleteUser(Long id){
-        User user = userRepository.getReferenceById(id);
         if(userRepository.existsById(id)){
             userRepository.deleteById(id);
         } else {
             throw new RuntimeException("Id não encontrado");
         }
+    }
+
+    public void changePassword(Long id, String currentPassword, String newPassword){
+        User user = userRepository.getReferenceById(id);
+        if(user.getPasswordHash().equals(currentPassword)){
+            user.setPasswordHash(newPassword);
+        } else {
+            throw new RuntimeException("Informe a senha atual");
+        }
+        save(user);
+    }
+
+    public User save(User user){
+         return userRepository.save(user);
     }
 }
