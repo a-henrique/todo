@@ -3,6 +3,7 @@ package com.todolist.todo.service;
 import com.todolist.todo.entity.User;
 import com.todolist.todo.repository.UserRepository;
 import org.aspectj.apache.bcel.generic.RET;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,10 @@ public class UserServices {
     }
 
     public User createUser(User user){
+        if(userRepository.existsByEmail(user.getEmail())){
+            throw new RuntimeException("Email já cadastrado");
+        }
+
         return save(user);
     }
 
@@ -65,6 +70,7 @@ public class UserServices {
     public User save(User user){
          return userRepository.save(user);
     }
+
 
     public User getByEmail(String email){
         User user = userRepository.findByEmail(email);

@@ -7,18 +7,33 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@Table(name = "users")
+@Table(
+        name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "uk_user_email", columnNames = "email")
+        }
+)
+
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+
+    @Column(nullable = false, unique = true) // Nao confiar apenas nessa flag para definir a constraint como única, é preciso tratar o erro.
     private String email;
+
+    @Column(nullable = false)
     private String passwordHash;
+
     private String role;
+
     private boolean status;
+
     private LocalDateTime created_at; //
+
     private LocalDateTime updated_at;
 
     public User(){
@@ -28,8 +43,8 @@ public class User {
     public User(Long id, String nome, String email, String passwordHash){
         this.id = id;
         this.nome = nome;
-        this.email = email;
-        this.role = "user";
+        this.email = email; // check
+        this.role = "user"; // check
         this.status = true;
         this.passwordHash = passwordHash;
         this.created_at = LocalDateTime.now();
