@@ -40,8 +40,7 @@ public class User {
 
     }
 
-    public User(Long id, String nome, String email, String passwordHash){
-        this.id = id;
+    public User(String nome, String email, String passwordHash){
         this.nome = nome;
         this.email = email; // check
         this.role = "user"; // check

@@ -2,8 +2,7 @@ package com.todolist.todo.service;
 
 import com.todolist.todo.entity.User;
 import com.todolist.todo.repository.UserRepository;
-import org.aspectj.apache.bcel.generic.RET;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,17 +11,22 @@ import java.util.List;
 public class UserServices {
 
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
 
-    public UserServices(UserRepository userRepository){
+    public UserServices(UserRepository userRepository, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public User createUser(User user){
-        if(userRepository.existsByEmail(user.getEmail())){
-            throw new RuntimeException("Email já cadastrado");
-        }
 
-        return save(user);
+    public boolean createUser(String nome, String email, String password){
+        if(userRepository.existsByEmail(email)){
+            throw new RuntimeException("Email já cadastrado");
+        };
+        User user = new User(nome, email, password);
+        String passwordHashed = passwordEncoder.encode(password);
+        save(user);
+        return true;
     }
 
     public User getById(Long id){

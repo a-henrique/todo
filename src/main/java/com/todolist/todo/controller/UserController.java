@@ -2,6 +2,7 @@ package com.todolist.todo.controller;
 
 
 import com.todolist.todo.dto.ChangePasswordRequest;
+import com.todolist.todo.dto.CreateUserRequest;
 import com.todolist.todo.entity.User;
 import com.todolist.todo.service.UserServices;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +20,8 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public User createUser(@RequestBody User user){
-        return userServices.createUser(user);
+    public boolean createUser(@RequestBody CreateUserRequest body){
+        return userServices.createUser(body.nome(), body.email(), body.password());
     }
 
     @GetMapping("/{id}/list")
