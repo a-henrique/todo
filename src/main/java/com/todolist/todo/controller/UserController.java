@@ -4,7 +4,6 @@ package com.todolist.todo.controller;
 import com.todolist.todo.dto.ChangePasswordRequest;
 import com.todolist.todo.entity.User;
 import com.todolist.todo.service.UserServices;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,4 +52,10 @@ public class UserController {
     public void changePassword(@PathVariable Long id, @RequestBody ChangePasswordRequest body){
         userServices.changePassword(id, body.currentPassword(), body.newPassword());
     }
+
+    @GetMapping("/email/{email}")
+    public User getByEmail(@PathVariable String email){
+        return userServices.getByEmail(email);
+    }
+
 }
