@@ -16,6 +16,11 @@ public class Todo {
     private boolean realizado;
     private int prioridade;
 
+    // Definicao da relacao, muitos cards para um usuario
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+
     public Todo(){
 
     }
