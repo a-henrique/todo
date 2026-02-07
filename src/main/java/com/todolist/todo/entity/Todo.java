@@ -20,18 +20,18 @@ public class Todo {
 
     }
 
-    public Todo(Long id, String nome, String descricao, boolean realizado, int prioridade){
+    public Todo(Long id, String nome, String descricao, int prioridade){
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.realizado = realizado;
+        this.realizado = false;
         this.prioridade = prioridade;
     }
 
-    public Todo(String nome, String descricao, boolean realizado, int prioridade){
+    public Todo(String nome, String descricao, int prioridade){
         this.nome = nome;
         this.descricao = descricao;
-        this.realizado = realizado;
+        this.realizado = false;
         this.prioridade = prioridade;
     }
 

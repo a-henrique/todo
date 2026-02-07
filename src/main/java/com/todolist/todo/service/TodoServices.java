@@ -16,7 +16,8 @@ public class TodoServices {
         this.todoRepository = todoRepository;
     }
 
-    public List<Todo> create(Todo todo){
+    public List<Todo> create(String nome, String descricao, int prioridade){
+        Todo todo = new Todo(nome, descricao, prioridade);
         todoRepository.save(todo);
         return list();
     }
