@@ -9,3 +9,4 @@ jobs:
   security:
     uses: a-henrique/devsecops-lab/.github/workflows/security-scan.yml@main
     secrets: inherit
+
