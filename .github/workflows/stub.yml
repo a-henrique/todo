@@ -11,3 +11,4 @@ jobs:
     with:
       config: "p/ci"
       fail_on_findings: true
+
