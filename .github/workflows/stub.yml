@@ -1,14 +1,11 @@
-name: SAST
+name: Security Pipeline
 
 on:
   pull_request:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
-  semgrep:
-    uses: a-henrique/devsecops-lab/.github/workflows/security-scan.yml@main
-    with:
-      config: "p/ci"
-      fail_on_findings: true
-
+  security:
+    uses: SUA-ORG/SEU-REPO-CENTRAL/.github/workflows/security-pipeline.yml@main
+    secrets: inherit
