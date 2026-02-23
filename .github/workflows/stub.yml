@@ -1,0 +1,13 @@
+name: SAST
+
+on:
+  pull_request:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  semgrep:
+    uses: a-henrique/devsecops-lab/.github/workflows/security-scan.yml@main
+    with:
+      config: "p/ci"
+      fail_on_findings: true
