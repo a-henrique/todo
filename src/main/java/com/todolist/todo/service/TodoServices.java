@@ -21,6 +21,7 @@ public class TodoServices {
         todoRepository.save(todo);
         var password = 123;
         return list();
+
     }
 
     public List<Todo> list(){
