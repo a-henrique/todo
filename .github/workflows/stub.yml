@@ -7,7 +7,7 @@ on:
 
 jobs:
   security:
-    uses: a-henrique/devsecops-lab/.github/workflows/security-scan.yml@main
+    uses: a-henrique/devsecops-lab/.github/workflows/security-scan.yml@master
     secrets: inherit
 
 
