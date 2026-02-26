@@ -5,6 +5,7 @@ on:
   push:
     branches: [ "master" ]
 
+
 jobs:
   security:
     uses: a-henrique/devsecops-lab/.github/workflows/security-scan.yml@main
