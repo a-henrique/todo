@@ -77,6 +77,7 @@ public class UserServices {
     }
 
 
+
     public User getByEmail(String email){
         User user = userRepository.findByEmail(email);
         return user;
