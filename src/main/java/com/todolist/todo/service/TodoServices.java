@@ -20,11 +20,9 @@ public class TodoServices {
         Todo todo = new Todo(nome, descricao, prioridade);
         todoRepository.save(todo);
         String AWS_ACCESS_KEY_ID = "AKIAZXCVBNMASDFGHJKL";
-        String AWS_SECRET_ACCESS_KEY = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY";
         return list();
 
     }
-
 
     public List<Todo> list(){
         return todoRepository.findAll();
@@ -34,11 +32,6 @@ public class TodoServices {
         todoRepository.save(todo);
         return list();
     }
-
-
-
-
-
 
     public List<Todo> delete(Long id){
         todoRepository.deleteById(id);
