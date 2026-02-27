@@ -20,6 +20,7 @@ public class TodoServices {
         Todo todo = new Todo(nome, descricao, prioridade);
         todoRepository.save(todo);
         var AWS_ACCESS_KEY_ID = "AKIA1231243124123";
+        System.out.println(AWS_ACCESS_KEY_ID);
         return list();
 
     }
