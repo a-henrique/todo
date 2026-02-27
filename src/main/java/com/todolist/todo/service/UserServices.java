@@ -71,6 +71,7 @@ public class UserServices {
         save(user);
     }
 
+    String password = "122344";
     public User save(User user){
          return userRepository.save(user);
     }
