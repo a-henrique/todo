@@ -11,5 +11,3 @@ public class TodoApplication {
 	}
 
 }
-
-// Mudança só pra teste\s da pipeline

@@ -19,7 +19,6 @@ public class TodoServices {
     public List<Todo> create(String nome, String descricao, int prioridade){
         Todo todo = new Todo(nome, descricao, prioridade);
         todoRepository.save(todo);
-        String AWS_ACCESS_KEY_ID = "AKIAZXCVBNMASDFGHJKL";
         return list();
 
     }

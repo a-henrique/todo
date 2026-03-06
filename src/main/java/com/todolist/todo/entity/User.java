@@ -1,10 +1,8 @@
 package com.todolist.todo.entity;
 
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(
@@ -28,13 +26,14 @@ public class User {
     @Column(nullable = false)
     private String passwordHash;
 
-    private String role;
-
     private boolean status;
 
     private LocalDateTime created_at; //
 
     private LocalDateTime updated_at;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public User(){
 
@@ -43,7 +42,7 @@ public class User {
     public User(String nome, String email, String passwordHash){
         this.nome = nome;
         this.email = email; // check
-        this.role = "user"; // check
+        this.role = Role.ROLE_USER; // check
         this.status = true;
         this.passwordHash = passwordHash;
         this.created_at = LocalDateTime.now();
@@ -74,11 +73,11 @@ public class User {
         this.email = email;
     }
 
-    public String role(){
+    public Role getRole(){
         return role;
     }
 
-    public void setRole(String role){
+    public void setRole(Role role){
         this.role = role;
     }
 

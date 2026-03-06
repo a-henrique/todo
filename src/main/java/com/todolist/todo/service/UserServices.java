@@ -6,12 +6,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServices {
 
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public UserServices(UserRepository userRepository, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
@@ -23,8 +24,8 @@ public class UserServices {
         if(userRepository.existsByEmail(email)){
             throw new RuntimeException("Email já cadastrado");
         };
-        User user = new User(nome, email, password);
         String passwordHashed = passwordEncoder.encode(password);
+        User user = new User(nome, email, passwordHashed);
         save(user);
         return true;
     }
@@ -71,13 +72,12 @@ public class UserServices {
         save(user);
     }
 
-    String password = "122344";
     public User save(User user){
          return userRepository.save(user);
     }
 
-    public User getByEmail(String email){
-        User user = userRepository.findByEmail(email);
+    public Optional<User> getByEmail(String email){
+        Optional<User> user = userRepository.findByEmail(email);
         return user;
     }
 }

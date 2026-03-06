@@ -8,6 +8,7 @@ import com.todolist.todo.service.UserServices;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -55,7 +56,7 @@ public class UserController {
     }
 
     @GetMapping("/email/{email}")
-    public User getByEmail(@PathVariable String email){
+    public Optional<User> getByEmail(@PathVariable String email){
         return userServices.getByEmail(email);
     }
 
