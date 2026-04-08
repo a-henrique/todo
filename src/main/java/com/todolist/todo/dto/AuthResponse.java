@@ -1,4 +1,4 @@
 package com.todolist.todo.dto;
 
-public record AuthResponse() {
+public record AuthResponse(String token) {
 }
