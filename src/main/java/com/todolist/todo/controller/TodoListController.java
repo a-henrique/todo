@@ -1,6 +1,7 @@
 package com.todolist.todo.controller;
 
 import com.todolist.todo.dto.CreateTodoListRequest;
+import com.todolist.todo.dto.TodoListResponse;
 import com.todolist.todo.entity.TodoList;
 import com.todolist.todo.service.TodoListService;
 import org.springframework.http.HttpStatus;
@@ -20,12 +21,19 @@ public class TodoListController {
 
     @PostMapping("/users/{userId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public TodoList createTodoList(@PathVariable Long userId, @RequestBody CreateTodoListRequest request){
-        return todoListService.create(request.title(), userId);
+    public TodoListResponse createTodoList(@PathVariable Long userId, @RequestBody CreateTodoListRequest request){
+        TodoList todoList = todoListService.create(request.title(), userId);
+        return new TodoListResponse(todoList.getId(), todoList.getTitle());
     }
 
     @GetMapping("/users/{userId}")
-    public List<TodoList> findByUserId(@PathVariable Long userId){
-        return todoListService.findByUserId(userId);
+    public List<TodoListResponse> findByUserId(@PathVariable Long userId){
+        return todoListService.findByUserId(userId)
+                .stream()
+                .map(todoList -> new TodoListResponse(
+                        todoList.getId(),
+                        todoList.getTitle()
+                ))
+                .toList();
     }
 }

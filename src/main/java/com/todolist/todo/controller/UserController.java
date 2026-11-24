@@ -1,6 +1,7 @@
 package com.todolist.todo.controller;
 
 import com.todolist.todo.dto.CreateUserRequest;
+import com.todolist.todo.dto.UserResponse;
 import com.todolist.todo.entity.User;
 import com.todolist.todo.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,8 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User create(@RequestBody CreateUserRequest request){
-        return userService.create(request.name(), request.email());
+    public UserResponse create(@RequestBody CreateUserRequest request){
+        User user = userService.create(request.name(), request.email());
+        return new UserResponse(user.getId(), user.getName(), user.getEmail());
     }
 }
