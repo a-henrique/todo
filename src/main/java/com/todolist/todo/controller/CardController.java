@@ -4,7 +4,9 @@ import com.todolist.todo.dto.CardRequest;
 import com.todolist.todo.dto.CardResponse;
 import com.todolist.todo.entity.Card;
 import com.todolist.todo.entity.TodoList;
+import com.todolist.todo.repository.CardRepository;
 import com.todolist.todo.service.CardService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +21,7 @@ public class CardController {
     }
 
     @PostMapping("{todoListId}/cards")
+    @ResponseStatus(HttpStatus.CREATED)
     public CardResponse create(@PathVariable Long todoListId, @RequestBody CardRequest request){
         Card card = cardService.create(
                 request.title(),
@@ -46,4 +49,30 @@ public class CardController {
                 .toList();
     }
 
+    @PatchMapping("/{todoListId}/cards/{cardId}/complete")
+    public CardResponse complete(
+            @PathVariable Long todoListId,
+            @PathVariable Long cardId
+    ) {
+       Card card = cardService.complete(todoListId, cardId);
+
+       return new CardResponse(
+               card.getId(),
+               card.getDescription(),
+               card.getTitle(),
+               card.isCompleted()
+       );
+    }
+
+    @PatchMapping("/{todoListId}/cards/{cardId}/reopen")
+    public CardResponse reopen(@PathVariable Long todoListId, @PathVariable Long cardId){
+
+        Card card = cardService.reopen(todoListId, cardId);
+        return new CardResponse(
+                card.getId(),
+                card.getTitle(),
+                card.getDescription(),
+                card.isCompleted()
+        );
+    }
 }

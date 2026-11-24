@@ -37,4 +37,32 @@ public class CardService {
 
         return cardRepository.findByTodoListId(todoListId);
     }
+
+    @Transactional
+    public Card complete(Long todoListId, Long cardId){
+        Card card = cardRepository.findById(cardId)
+                .orElseThrow(() -> new EntityNotFoundException("Card Not Found")
+                );
+
+        if (!card.getTodoList().getId().equals(todoListId)){
+            throw new EntityNotFoundException("Card does not belong to this TodoList");
+        }
+
+        card.complete();
+
+        return card;
+    }
+
+    @Transactional
+    public Card reopen (Long todoListId, Long cardId){
+        Card card = cardRepository.findById(cardId)
+                .orElseThrow(() -> new EntityNotFoundException("Card not found"));
+
+        if(!card.getTodoList().getId().equals(todoListId)){
+            throw new EntityNotFoundException("Card does not belog to this TodoList");
+        }
+
+        card.reopen();
+        return card;
+    }
 }

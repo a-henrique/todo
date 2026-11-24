@@ -50,4 +50,12 @@ public class Card {
     public TodoList getTodoList() {
         return todoList;
     }
+
+    public void complete(){
+        this.completed = true;
+    }
+
+    public void reopen(){
+        this.completed = false;
+    }
 }

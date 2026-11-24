@@ -1,5 +1,6 @@
 package com.todolist.todo.service;
 
+import com.todolist.todo.entity.Card;
 import com.todolist.todo.entity.User;
 import com.todolist.todo.repository.UserRepository;
 import org.springframework.stereotype.Service;
