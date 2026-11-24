@@ -15,5 +15,24 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    protected User(){
 
+    }
+
+    public User(String name, String email){
+        this.name = name;
+        this.email = email;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
