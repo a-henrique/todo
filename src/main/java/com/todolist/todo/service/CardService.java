@@ -1,8 +1,10 @@
 package com.todolist.todo.service;
 
 import com.todolist.todo.entity.Card;
+import com.todolist.todo.entity.Label;
 import com.todolist.todo.entity.TodoList;
 import com.todolist.todo.repository.CardRepository;
+import com.todolist.todo.repository.LabelRepository;
 import com.todolist.todo.repository.TodoListRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -14,10 +16,12 @@ import java.util.List;
 public class CardService {
     private final TodoListRepository todoListRepository;
     private final CardRepository cardRepository;
+    private final LabelRepository labelRepository;
 
-    public CardService(TodoListRepository todoListRepository, CardRepository cardRepository){
+    public CardService(TodoListRepository todoListRepository, CardRepository cardRepository, LabelRepository labelRepository){
         this.todoListRepository = todoListRepository;
-        this.cardRepository= cardRepository;
+        this.cardRepository = cardRepository;
+        this.labelRepository = labelRepository;
     }
 
     @Transactional
@@ -64,5 +68,18 @@ public class CardService {
 
         card.reopen();
         return card;
+    }
+
+    @Transactional
+    public void addLabelToCard(Long cardId, Long labelId){
+        Card card = cardRepository.findById(cardId)
+                .orElseThrow(() -> new RuntimeException("Card not found."));
+
+        Label label = labelRepository.findById(labelId)
+                .orElseThrow(() -> new RuntimeException("Label Not Found"));
+
+        card.addLabel(label);
+
+        cardRepository.save(card);
     }
 }

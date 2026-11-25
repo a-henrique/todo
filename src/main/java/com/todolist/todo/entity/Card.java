@@ -2,6 +2,10 @@ package com.todolist.todo.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "cards")
 public class Card {
@@ -57,5 +61,25 @@ public class Card {
 
     public void reopen(){
         this.completed = false;
+    }
+
+    @ManyToMany
+    @JoinTable(
+            name = "card_labels",
+            joinColumns = @JoinColumn(name = "card_id"),
+            inverseJoinColumns = @JoinColumn(name = "label_id")
+    )
+    private Set<Label> labels = new HashSet<>();
+
+    public void addLabel(Label label){
+        labels.add(label);
+    }
+
+    public void removeLabel(Label label){
+        labels.remove(label);
+    }
+
+    public Set<Label> getLabels(){
+        return Collections.unmodifiableSet(labels);
     }
 }

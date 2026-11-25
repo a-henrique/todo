@@ -75,4 +75,16 @@ public class CardController {
                 card.isCompleted()
         );
     }
+
+    @PostMapping("/cards/{cardId}/labels/{labelId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addLabel(
+            @PathVariable Long cardId,
+            @PathVariable Long labelId
+    ){
+        cardService.addLabelToCard(cardId, labelId);
+    }
+
+    @GetMapping("/cards/{cardId}/labels")
+    public Labe
 }
